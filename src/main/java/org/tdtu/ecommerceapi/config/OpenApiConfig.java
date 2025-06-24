@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.context.annotation.Configuration;
 
 // Swagger-ui endpoint: http://localhost:8080/swagger-ui/index.html#
@@ -16,6 +17,9 @@ import org.springframework.context.annotation.Configuration;
                 version = "v1.0",
                 description = "This is the API documentation for the E-commerce application developed as a final project.",
                 contact = @Contact(name = "Nguyen Hoang Danh")),
+        servers = {
+                @Server(url = "${server.uri}"),
+        },
         security = @SecurityRequirement(name = "bearerAuth")
 )
 @SecurityScheme(
