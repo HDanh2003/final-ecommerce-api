@@ -104,6 +104,7 @@ public class SecurityConfig {
         } else {
             httpSecurity
                     .authorizeHttpRequests(authorize -> authorize
+                                    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                     .requestMatchers(byPassPath).permitAll()
                                     .requestMatchers("/read/**").hasAuthority("SCOPE_read")
                                     .requestMatchers("/write/**").hasAuthority("SCOPE_write")
