@@ -26,6 +26,8 @@ jobs:
         run: mvn test
 
       - name: Deploy to Railway
-        uses: railwayapp/cli-action@v1
+        uses: bervProject/railway-deploy@main
         with:
-          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
+          service: "deploy-api-by-github-action"  # Thay bằng tên dịch vụ trên Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
