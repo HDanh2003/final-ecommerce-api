@@ -1,0 +1,1 @@
+docker build . -f ./.nixpacks/Dockerfile -t 6549e790-c8c0-46d9-8ce1-2693ffa7cc01 --build-arg NIXPACKS_METADATA=java
