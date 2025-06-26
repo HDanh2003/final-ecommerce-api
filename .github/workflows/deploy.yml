@@ -65,6 +65,7 @@ jobs:
                 "variables": { "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}", "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}" }
             }' \
             https://backboard.railway.app/graphql/v2
+          | echo "Response: ${{ secrets.RAILWAY_ENVIRONMENT_ID }}"
 
 # For deploying directly to Railway
 #      - name: Deploy to Railway
