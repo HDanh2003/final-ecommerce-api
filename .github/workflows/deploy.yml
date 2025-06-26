@@ -52,7 +52,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/ecom-image:latest
+          tags: ghcr.io/hdanh2003/ecom-image:latest
 
 # For deploying directly to Railway
 #      - name: Deploy to Railway
