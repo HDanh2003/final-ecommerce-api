@@ -1,9 +1,9 @@
-name: Deploy to Railway
+name: Deploy to GHCR-Railway
 
 on:
   push:
     branches:
-      - deploy
+      - feature/using-ghcr
 
 jobs:
   build-and-deploy:
