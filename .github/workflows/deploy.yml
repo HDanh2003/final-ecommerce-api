@@ -54,6 +54,17 @@ jobs:
           push: true
           tags: ghcr.io/hdanh2003/ecom-image:latest
 
+      - name: Trigger Railway Redeploy
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.RAILWAY_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "query": "mutation RedeployService($input: RedeployServiceInput!) { redeployService(input: $input) { service { id } } }",
+              "variables": { "input": { "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}", "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}" } }
+            }' \
+            https://backboard.railway.app/graphql/v2
+
 # For deploying directly to Railway
 #      - name: Deploy to Railway
 #        uses: bervProject/railway-deploy@main
