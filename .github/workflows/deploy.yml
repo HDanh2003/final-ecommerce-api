@@ -59,7 +59,9 @@ jobs:
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.RAILWAY_API_TOKEN }}" \
             -H "Content-Type: application/json" \
-            - d "{\"query\": \"mutation ServiceInstanceDeploy($serviceId: String!, $environmentId: String!, $commitSha: String, $latestCommit: Boolean) { serviceInstanceDeploy(serviceId: $serviceId, environmentId: $environmentId, commitSha: $commitSha, latestCommit: $latestCommit) }\", \"variables\": { \"serviceId\": \"${{ secrets.RAILWAY_SERVICE_ID }}\", \"environmentId\": \"${{ secrets.RAILWAY_ENVIRONMENT_ID }}\" }, \"operationName\": \"serviceInstanceDeploy\"}" \
+            -d '{"query": "mutation ServiceInstanceDeploy(\$serviceId: String!, \$environmentId: String!)
+          { serviceInstanceDeploy(serviceId: \$serviceId, environmentId: \$environmentId) }",
+          "variables": { "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}", "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}" }}' \
             https://backboard.railway.app/graphql/v2
 
 # For deploying directly to Railway
