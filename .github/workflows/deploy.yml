@@ -62,10 +62,10 @@ jobs:
             -d '{
                 "query": "mutation ServiceInstanceDeploy($serviceId: String!, $environmentId: String!, $commitSha: String, $latestCommit: Boolean)
                 { serviceInstanceDeploy(serviceId: $serviceId, environmentId: $environmentId, commitSha: $commitSha, latestCommit: $latestCommit) }",
-                "variables": { "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}", "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}" }
+                "variables": { "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}", "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}" },
+                "operationName":"serviceInstanceDeploy"
             }' \
             https://backboard.railway.app/graphql/v2
-          | echo "Response: ${{ secrets.RAILWAY_ENVIRONMENT_ID }}"
 
 # For deploying directly to Railway
 #      - name: Deploy to Railway
