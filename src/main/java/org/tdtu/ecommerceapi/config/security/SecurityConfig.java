@@ -106,6 +106,7 @@ public class SecurityConfig {
             httpSecurity
                     .authorizeHttpRequests(authorize -> authorize
                                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                    .requestMatchers(HttpMethod.POST, "/v1/chat/assistant").permitAll()
                                     .requestMatchers(byPassPath).permitAll()
                                     .requestMatchers("/read/**").hasAuthority("SCOPE_read")
                                     .requestMatchers("/write/**").hasAuthority("SCOPE_write")

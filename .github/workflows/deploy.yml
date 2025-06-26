@@ -60,8 +60,9 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.RAILWAY_API_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "query": "mutation RedeployService($input: RedeployServiceInput!) { redeployService(input: $input) { service { id } } }",
-              "variables": { "input": { "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}", "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}" } }
+                "query": "mutation ServiceInstanceDeploy($serviceId: String!, $environmentId: String!, $commitSha: String, $latestCommit: Boolean)
+                { serviceInstanceDeploy(serviceId: $serviceId, environmentId: $environmentId, commitSha: $commitSha, latestCommit: $latestCommit) }",
+                "variables": { "serviceId": "${{ secrets.RAILWAY_SERVICE_ID }}", "environmentId": "${{ secrets.RAILWAY_ENVIRONMENT_ID }}" }
             }' \
             https://backboard.railway.app/graphql/v2
 
