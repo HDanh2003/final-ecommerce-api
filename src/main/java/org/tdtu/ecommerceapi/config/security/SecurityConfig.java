@@ -15,9 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenIntrospectionClaimNames;
@@ -107,6 +105,7 @@ public class SecurityConfig {
                     .authorizeHttpRequests(authorize -> authorize
                                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                     .requestMatchers(HttpMethod.POST, "/v1/chat/assistant").permitAll()
+                                    .requestMatchers("/api/s3/**").permitAll()
                                     .requestMatchers(byPassPath).permitAll()
                                     .requestMatchers("/read/**").hasAuthority("SCOPE_read")
                                     .requestMatchers("/write/**").hasAuthority("SCOPE_write")
@@ -195,6 +194,18 @@ public class SecurityConfig {
         final JwtAuthenticationConverter jac = new JwtAuthenticationConverter();
         jac.setJwtGrantedAuthoritiesConverter(gac);
         return jac;
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.addAllowedOriginPattern("*");
+        corsConfiguration.addAllowedHeader("*");
+        corsConfiguration.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return new CorsFilter(source);
     }
 
     @Bean
